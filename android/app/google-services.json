@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "348150520929",
+    "project_id": "investment-analytica",
+    "storage_bucket": "investment-analytica.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348150520929:android:20cfab289de571783d5e20",
+        "android_client_info": {
+          "package_name": "com.investmentanalytica.investment_analatyca_testthree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348150520929-63r9l8odslescsp3hcmgv620afat2m6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-tyQKZUOj08ydGoCy0HSlwj-B2Koja28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348150520929-63r9l8odslescsp3hcmgv620afat2m6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
