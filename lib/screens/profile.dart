@@ -44,9 +44,9 @@ class _profilePageState extends State<profilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
         child: Center(
-          child: Column(
+          child: ListView(
             //crossAxisAlignment: CrossAxisAlignment.baseline,
             children: [
               const Center(
@@ -178,9 +178,24 @@ class _profilePageState extends State<profilePage> {
                   ),*/
                 ],
               ),
-              /* const SizedBox(
-                height: 10,
-              ),*/
+              const SizedBox(
+                height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: SizedBox(
+                  height: 70,
+                  width: 200,
+                  child: Text(
+                    'Your password must be more than 6 character and include a combination ofnumbera, lestters and special characters(!@%).',
+                    style: TextStyle(fontSize: 18, color: Colors.black45),
+                    maxLines: 200,
+                    overflow: TextOverflow.fade,
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
               Container(
                 width: double.infinity,
                 height: 350,
@@ -189,7 +204,7 @@ class _profilePageState extends State<profilePage> {
                   borderRadius: BorderRadius.circular(40),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Column(
                     children: [
                       const SizedBox(
@@ -353,7 +368,29 @@ class _profilePageState extends State<profilePage> {
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: 200,
+                        child: MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          color: Colors.red,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const loginPage()),
+                            );
+                          },
+                          child: const Text(
+                            'Log out',
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

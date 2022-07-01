@@ -3,8 +3,6 @@ import 'package:http/http.dart';
 import 'df.dart';
 
 class HttpService {
-  // http://127.0.0.1:5000/ all data
-
   final String Data_URL = 'http://10.0.2.2:5000/';
 
   /* final String recommendation_URl = 'http://10.0.2.2:5000/recommendation/';
@@ -31,7 +29,7 @@ class HttpService {
     Response res = await get(Uri.parse(Data_URL));
 
     if (res.statusCode == 200) {
-      print("Start!!!");
+      //print("Start!!!");
       print(res.body);
       print(parseData(res.body).length);
       return parseData(res.body);

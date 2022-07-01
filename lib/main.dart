@@ -10,8 +10,6 @@ import 'package:investment_analatyca_testthree/screens/Articles.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  //NativeNotify.initialize(476, 'wW3vNWG86zaXBVzcaLMXMb', null);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -30,13 +28,9 @@ class _MyAppState extends State<MyApp> {
       create: (context) => LanguageChangeProvider(),
       child: Builder(builder: (context) {
         return MaterialApp(
-          /*theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: _themeManager.themeMode,*/
           locale: Provider.of<LanguageChangeProvider>(context, listen: true)
               .currentLocal,
           debugShowCheckedModeBanner: false,
-
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -49,8 +43,6 @@ class _MyAppState extends State<MyApp> {
           home: const Scaffold(
             body: loginPage(),
           ),
-          //theme: ThemeData(scaffoldBackgroundColor: Colors.teal),
-          //theme: ,
         );
       }),
     );
@@ -100,7 +92,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             children: [
               buildNavBar(Icons.note, 0),
               buildNavBar(Icons.home_filled, 1),
-              // buildNavBar(Icons.home, 2),
               buildNavBar(Icons.person, 2),
             ],
           ),
@@ -117,17 +108,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         });
       },
       child: Container(
-        decoration: BoxDecoration(
-            //color: Color(0xFFEEEEEE),
-            //borderRadius: BorderRadius.circular(15),
-            ),
+        decoration: BoxDecoration(),
         child: SizedBox(
           width: 80,
           child: Container(
             height: 60,
-
-            width: MediaQuery.of(context).size.width /
-                3, //take the sizze of the screen,
+            width: MediaQuery.of(context).size.width / 3,
             decoration: index == _selectedItem
                 ? BoxDecoration(
 
@@ -135,10 +121,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
                     border: const Border(
                       bottom: BorderSide(width: 4, color: Colors.black),
                     ),
-                    /* gradient: LinearGradient(colors: [
-                      const Color(0XFF9575CD).withOpacity(0.3),
-                      Colors.black26.withOpacity(0.015)
-                    ],begin: Alignment.bottomCenter, end: Alignment.topCenter),*/
                     color:
                         index == _selectedItem ? Colors.white : Colors.white10)
                 : const BoxDecoration(),

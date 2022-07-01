@@ -1,4 +1,7 @@
-import 'dart:convert';
+import 'dart:convert' show jsonDecode;
+import 'dart:async';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'chart_generator.dart';
@@ -8,6 +11,8 @@ import 'package:investment_analatyca_testthree/services/http_services.dart';
 import 'package:investment_analatyca_testthree/services/df.dart';
 import 'package:investment_analatyca_testthree/services/http_services.dart';
 import 'package:investment_analatyca_testthree/services/df.dart';
+import 'services/datum.dart';
+import 'services/stockchart.dart';
 
 class StockDetailsPage extends StatefulWidget {
   const StockDetailsPage({Key? key}) : super(key: key);
@@ -20,6 +25,7 @@ class _StockDetailsPageState extends State<StockDetailsPage> {
   HttpService service = HttpService();
   late Future<List<dynamic>> futureOpenPrice;
   late Future<List<dynamic>> futureClosePrice;
+
   bool is_visible = true;
   bool Day1is_visible = false;
   bool Day5is_visible = false;
@@ -316,16 +322,197 @@ class _StockDetailsPageState extends State<StockDetailsPage> {
               height: 20,
             ), //////////////////////////////here
             Container(
-                //child: _buildBody(context),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 210,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                    color: const Color(0XFFD2DDD8),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 38,
+                                  width: 38,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: const Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    color: const Color(0XFFB6C4BD),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(5.0),
+                                  child: Icon(
+                                    Icons.apple,
+                                    size: 30,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 7,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  'Apple',
+                                  style: const TextStyle(
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text('Apple lnc')
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 115,
+                            ),
+                            Column(
+                              //crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  ' 123.54',
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Colors.black54),
+                                ),
+                                Text(
+                                  '+222',
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 14),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        Row(
+                          children: const [
+                            Text(
+                              'Recomendation:  ',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            Text(
+                              'Sell',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        const Divider(
+                          color: Colors.black45,
+                          thickness: 0.5,
+                          height: 10.0,
+                          indent: 15.0,
+                          endIndent: 10.0,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: const [
+                            Text(
+                              'Open',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            SizedBox(
+                              width: 60,
+                            ),
+                            Text(
+                              'Day High',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            SizedBox(
+                              width: 60,
+                            ),
+                            Text(
+                              'Day Low',
+                              style: TextStyle(fontSize: 18),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: const [
+                            Text(
+                              '2.22.3 ',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 60,
+                            ),
+                            Text(
+                              '45.62',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 60,
+                            ),
+                            Text(
+                              '85.32',
+                              style: TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+              ),
+            ),
             const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(2.0),
               child: Container(
-                height: 400,
-                width: 351,
+                height: 450,
+                width: 100,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.black45,
@@ -348,16 +535,18 @@ class _StockDetailsPageState extends State<StockDetailsPage> {
                       padding: const EdgeInsets.fromLTRB(10, 12, 10, 15),
                       child: Container(
                         height: 50,
-                        width: 340,
+                        width: 400,
                         decoration: BoxDecoration(
-                          color: Color(0XFFEEEEEE),
+                          //color: Color(0XFFEEEEEE),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Wrap(
                           children: [
-                            Row(
+                            /* Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
+                                /*
+
                                 TextButton(
                                   style: TextButton.styleFrom(
                                     textStyle: const TextStyle(
@@ -380,13 +569,13 @@ class _StockDetailsPageState extends State<StockDetailsPage> {
                                     });
                                   },
                                   child: const Text(
-                                    '1D',
+                                    '2Y',
                                     style: TextStyle(
                                       color: Colors.black45,
                                     ),
                                   ),
-                                ),
-                                /////////////////
+                                )*/
+                                /*/////////////////
                                 TextButton(
                                   style: TextButton.styleFrom(
                                     shape: RoundedRectangleBorder(
@@ -504,48 +693,20 @@ class _StockDetailsPageState extends State<StockDetailsPage> {
                                     ),
                                   ),
                                 ),
-                                /////////////
+                                */
                               ],
-                            ),
+                            ),*/
                             const SizedBox(
-                              height: 40,
+                              height: 20,
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(8, 30, 8, 8),
-                              child: Visibility(
-                                  visible: is_visible ||
-                                      Day5is_visible ||
-                                      Weekis_visible ||
-                                      Monthis_visible ||
-                                      Day1is_visible == true,
-                                  child: SfCartesianChart(
-                                      primaryXAxis: CategoryAxis(),
-                                      // Chart title
-                                      //title: ChartTitle(text: 'Monthly Covid-19 Infections'),
-                                      // Enable legend
-                                      legend: Legend(isVisible: false),
-                                      // Enable tooltip
-                                      tooltipBehavior: TooltipBehavior(
-                                        enable: true,
-                                        color: const Color(0XFFD2DDD8),
-                                        textStyle: const TextStyle(
-                                            color: Colors.black),
-                                      ),
-                                      series: <ChartSeries<ChartData, String>>[
-                                        LineSeries<ChartData, String>(
-                                          color: Colors.black,
-                                          dataSource: chartData,
-                                          xValueMapper: (ChartData data, _) =>
-                                              data.date,
-                                          yValueMapper: (ChartData data, _) =>
-                                              data.price,
-                                          // Enable data label
-                                          dataLabelSettings:
-                                              const DataLabelSettings(
-                                                  isVisible: false),
-                                        )
-                                      ])),
-                            ),
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                  height: 440,
+                                  width: 380,
+                                  child: StockChartExample()),
+                            )
+                            //StockChartExample()
                           ],
                         ),
                       ),
@@ -584,31 +745,108 @@ class _StockDetailsPageState extends State<StockDetailsPage> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SfCartesianChart(
-                      primaryXAxis: CategoryAxis(),
-                      // Chart title
-                      //title: ChartTitle(text: 'Monthly Covid-19 Infections'),
-                      // Enable legend
-                      legend: Legend(isVisible: false),
-                      // Enable tooltip
-                      tooltipBehavior: TooltipBehavior(
-                        enable: true,
-                        color: const Color(0XFFD2DDD8),
-                        textStyle: const TextStyle(color: Colors.black),
-                      ),
-                      series: <ChartSeries<ChartData, String>>[
-                        LineSeries<ChartData, String>(
-                          color: Colors.black,
-                          dataSource: chartData,
-                          xValueMapper: (ChartData data, _) => data.date,
-                          yValueMapper: (ChartData data, _) => data.price,
-                          // Enable data label
-                          dataLabelSettings:
-                              const DataLabelSettings(isVisible: false),
-                        )
-                      ]),
-                ),
+                    padding: const EdgeInsets.all(12.0),
+                    child: SfCartesianChart(
+
+                        // Initialize category axis
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries>[
+                          // Initialize line series
+                          (LineSeries<ChartData, String>(
+                              color: Colors.black,
+                              sortingOrder: SortingOrder.ascending,
+                              width: 3,
+                              enableTooltip: true,
+                              isVisibleInLegend: true,
+                              isVisible: true,
+                              dataSource: [
+                                // Bind data source
+                                ChartData('Jan', 1),
+                                ChartData('Jan', 2),
+                                ChartData('Jan', 2),
+                                ChartData('Jan', 3),
+                                ChartData('Feb', 3),
+                                ChartData('Mar', 4),
+                                ChartData('Apr', 5),
+                                ChartData('Apr', 5),
+                                ChartData('Apr', 5),
+                                ChartData('Apr', 5),
+                                ChartData('May', 5),
+                                ChartData('July', 6),
+                                ChartData('July', 6),
+                                ChartData('July', 7),
+                                ChartData('July', 7),
+                                ChartData('July', 10),
+                                ChartData('July', 8),
+                                ChartData('July', 8),
+                                ChartData('July', 8),
+                                ChartData('July', 9),
+                                ChartData('July', 9),
+                                ChartData('July', 9),
+                                ChartData('July', 9),
+                                ChartData('July', 10),
+                                ChartData('July', 10),
+                                ChartData('July', 11),
+                                ChartData('July', 12),
+                                ChartData('July', 12),
+                                ChartData('Augest', 18),
+                                ChartData('Septemper', 18),
+                                ChartData('Octoper', 19),
+                                ChartData('Novamber', 19),
+                                ChartData('Novamber', 19),
+                                ChartData('December', 19),
+                                ChartData('December', 18),
+                                ChartData('December', 18),
+                                ChartData('December', 18),
+                                ChartData('December', 19),
+                                ChartData('December', 19),
+                                ChartData('December', 19),
+                                ChartData('December', 20),
+                              ],
+                              xValueMapper: (ChartData data, _) => data.date,
+                              yValueMapper: (ChartData data, _) => data.price)),
+                          (LineSeries<ChartData, String>(
+                              color: Colors.yellow,
+                              width: 3,
+                              dataSource: [
+                                // Bind data source
+                                ChartData('Jan', 5),
+                                ChartData('Jan', 3),
+                                ChartData('Jan', 2),
+                                ChartData('Jan', 1),
+                                ChartData('Feb', 10),
+                                ChartData('Mar', 14),
+                                ChartData('Apr', 12),
+                                ChartData('May', 11),
+                                ChartData('July', 12),
+                                ChartData('July', 13),
+                                ChartData('July', 15),
+                                ChartData('July', 15),
+                                ChartData('July', 14),
+                                ChartData('July', 14),
+                                ChartData('July', 13),
+                                ChartData('July', 12),
+                                ChartData('July', 12),
+                                ChartData('July', 13),
+                                ChartData('July', 14),
+                                ChartData('July', 15),
+                                ChartData('July', 16),
+                                ChartData('July', 14),
+                                ChartData('July', 15),
+                                ChartData('July', 15),
+                                ChartData('July', 16),
+                                ChartData('Augest', 18),
+                                ChartData('Septemper', 25),
+                                ChartData('Octoper', 35),
+                                ChartData('Novamber', 35),
+                                ChartData('Novamber', 36),
+                                ChartData('December', 37),
+                                ChartData('December', 39),
+                                ChartData('December', 40)
+                              ],
+                              xValueMapper: (ChartData data, _) => data.date,
+                              yValueMapper: (ChartData data, _) => data.price))
+                        ])),
               ),
             ),
           ],
